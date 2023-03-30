@@ -1,4 +1,4 @@
-package mutils
+package telegram
 
 import (
 	"errors"
