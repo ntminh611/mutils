@@ -54,7 +54,7 @@ func (tl *Telegram) request(c CustomTgMessage) (*tgbotapi.APIResponse, error) {
 	return tl.Bot.MakeRequest(c.method(), params)
 }
 
-func (tl *Telegram) SendTelegramTopic(options TelegramMessageOptions) error {
+func (tl *Telegram) Send2Topic(options TelegramMessageOptions) error {
 	_, err := tl.sendCustom(options)
 	if err != nil {
 		return fmt.Errorf("ERROR WHILE SENDING MESSAGE TO TELEGRAM: %v", err)

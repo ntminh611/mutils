@@ -24,11 +24,21 @@ func NewTelegramBot(token string) *Telegram {
 		log.Panic(err)
 	}
 
+	return &Telegram{Bot: *bot, token: token, mutex: &sync.Mutex{}}
+}
+
+func NewTelegramBotWithReceived(token string) *Telegram {
+	bot, err := tgbotapi.NewBotAPI(token)
+	if err != nil {
+		log.Panic(err)
+	}
+
 	bot.Debug = false
 	bot.Buffer = 1000
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 	rec := bot.GetUpdatesChan(u)
+
 	return &Telegram{Bot: *bot, Received: rec, token: token, mutex: &sync.Mutex{}}
 }
 
