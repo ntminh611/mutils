@@ -10,7 +10,7 @@ import (
 )
 
 func String2Uint64(str string) uint64 {
-	str = Remove0x(str)
+	str = strings.TrimSpace(str)
 	result, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
 		log.Println("String2Uint64 ", err)
@@ -19,7 +19,7 @@ func String2Uint64(str string) uint64 {
 }
 
 func String2Int64(str string) int64 {
-	str = Remove0x(str)
+	str = strings.TrimSpace(str)
 	result, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
 		log.Println("String2Int64 ", err)
@@ -28,7 +28,7 @@ func String2Int64(str string) int64 {
 }
 
 func String2Int(str string) int {
-	str = Remove0x(str)
+	str = strings.TrimSpace(str)
 	result, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
 		log.Println("String2Int ", err)
@@ -37,7 +37,7 @@ func String2Int(str string) int {
 }
 
 func String2Float64(str string) float64 {
-	str = Remove0x(str)
+	str = strings.TrimSpace(str)
 	result, err := strconv.ParseFloat(str, 64)
 	if err != nil {
 		log.Println("String2Float64 ", err)
@@ -61,27 +61,25 @@ func StringContains(str1, str2 string) bool {
 }
 
 func Hex2Int64(hexStr string) int64 {
-	// remove 0x suffix if found in the input string
-	cleaned := strings.Replace(hexStr, "0x", "", -1)
-
-	// base 16 for hexadecimal
-	result, _ := strconv.ParseInt(cleaned, 16, 64)
+	hexStr = Remove0x(hexStr)
+	result, _ := strconv.ParseInt(hexStr, 16, 64)
 	return result
 }
 
 func Hex2BigInt(hexStr string) *big.Int {
-	cleaned := strings.Replace(hexStr, "0x", "", -1)
+	hexStr = Remove0x(hexStr)
 	result := new(big.Int)
-	result.SetString(cleaned, 16)
+	result.SetString(hexStr, 16)
 	return result
 }
 
 func Remove0x(hexStr string) string {
-	// remove 0x suffix if found in the input string
+	hexStr = Remove0x(hexStr)
 	return strings.Replace(hexStr, "0x", "", -1)
 }
 
 func String2BigInt(str string) *big.Int {
+	str = strings.TrimSpace(str)
 	result := new(big.Int)
 	result, ok := result.SetString(str, 10)
 	if !ok {
