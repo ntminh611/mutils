@@ -7,9 +7,10 @@ import (
 )
 
 type TelegramMessageOptions struct {
-	ChatID  int64
-	TopicID int
-	Message string
+	ChatID           int64
+	TopicID          int
+	Message          string
+	ReplyToMessageID int
 }
 
 type CustomTgMessage interface {
@@ -21,6 +22,7 @@ func (options TelegramMessageOptions) params() (tgbotapi.Params, error) {
 	params := make(tgbotapi.Params)
 	params.AddFirstValid("chat_id", options.ChatID)
 	params.AddFirstValid("message_thread_id", options.TopicID)
+	params.AddNonZero("reply_to_message_id", options.ReplyToMessageID)
 	params.AddNonEmpty("text", options.Message)
 	params.AddNonEmpty("parse_mode", "HTML") // refer to "formatting-options" of telegram API
 	//params.AddNonEmpty("parse_mode", "markdown")     // refer to "formatting-options" of telegram API
