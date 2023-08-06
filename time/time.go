@@ -1,8 +1,9 @@
 package time
 
 import (
-	string2 "github.com/ntminh611/mutils/string"
 	"time"
+
+	string2 "github.com/ntminh611/mutils/string"
 )
 
 var local, _ = time.LoadLocation("Asia/Ho_Chi_Minh")
