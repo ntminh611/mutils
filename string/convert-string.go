@@ -74,7 +74,6 @@ func Hex2BigInt(hexStr string) *big.Int {
 }
 
 func Remove0x(hexStr string) string {
-	hexStr = Remove0x(hexStr)
 	return strings.Replace(hexStr, "0x", "", -1)
 }
 
